@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "959499359406",
+    "firebase_url": "https://quaterproject.firebaseio.com",
+    "project_id": "quaterproject",
+    "storage_bucket": "quaterproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959499359406:android:6934262745ebd1de",
+        "android_client_info": {
+          "package_name": "com.example.luistrujillo.pomodoro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959499359406-673v6k9torhbi569kp2vetbf98iq7vu9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.luistrujillo.pomodoro",
+            "certificate_hash": "351dfde442952b245c594819e0e82b319d868977"
+          }
+        },
+        {
+          "client_id": "959499359406-u6ek3lfeqi0vcnfc9orm8mtl413citvd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM-ZAfQWJjmlEmWLTkgh_NpOq8douWroc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959499359406-u6ek3lfeqi0vcnfc9orm8mtl413citvd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

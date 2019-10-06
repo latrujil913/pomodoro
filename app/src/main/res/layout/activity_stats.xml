@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_light_grey">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  tools:context="com.example.mansigoel.charts.MainActivity">
+
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Bar Chart"
+                android:textColor="@color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:elevation="300dp"
+                app:cardBackgroundColor="@color/white">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp" >
+
+                <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="8dp"/>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="20dp"
+                />
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:paddingVertical="10dp"
+                      android:background="@android:color/darker_gray" />
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="15dp"
+                />
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Average time worked by day"
+                          android:paddingVertical="5dp"
+                          android:textColor="@color/black"
+                          android:textStyle="bold" android:textSize="18sp"/>
+
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:paddingVertical="2dp"
+                          android:text="This chart shows how much time you worked on average on a given day of the week"/>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Line Chart"
+                android:textColor="@color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:elevation="200dp"
+                app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp" >
+
+                <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="2dp"/>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="20dp"
+                       />
+
+                <View android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                      android:paddingVertical="10dp"
+                        android:background="@android:color/darker_gray" />
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="15dp"
+                />
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Hourly Average"
+                          android:paddingVertical="5dp"
+                          android:textColor="@color/black"
+                          android:textStyle="bold" android:textSize="18sp"/>
+
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:paddingVertical="2dp"
+                          android:text="This chart shows how much work you did on average diring a given hour of the day."/>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Pie Chart"
+                android:textColor="@color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="200dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp" >
+
+                <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="8dp" />
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="20dp"
+                />
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:paddingVertical="10dp"
+                      android:background="@android:color/darker_gray" />
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="15dp"
+                />
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Percentage Distribution"
+                          android:paddingVertical="5dp"
+                          android:textColor="@color/black"
+                          android:textStyle="bold" android:textSize="18sp"/>
+
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:paddingVertical="2dp"
+                          android:text="This chart show the percentage of time you spent working on a given day of the week."/>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
