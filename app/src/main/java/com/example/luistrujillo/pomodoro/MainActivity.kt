@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         // Create a new instance to add
         // Need to verify that this is the proper way to store user data before even thinking of publishing
         // TODO: if user exists read from database
-        val newUser = user?.email?.let {
+        val newUser = user?.displayName?.let {
             UserProfile(
                 it,
                 0f,
@@ -69,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         // Add as a new entry to the UserProfiles, using the name as the key
         if (newUser != null) {
             userRef.child(newUser.name).setValue(newUser)
+        }
+        else{
+
         }
 
         // Set listener to be notified to any changes in UserProfiles

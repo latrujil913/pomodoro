@@ -55,7 +55,7 @@ class StatsActivity : AppCompatActivity() {
 
         // Define the pie chart data slices
         val yValues = setupDummyPie()
-        val dataSet = PieDataSet(yValues, "Week Days")
+        val dataSet = PieDataSet(yValues as MutableList<PieEntry>?, "Week Days")
         dataSet.sliceSpace = 3f
         dataSet.selectionShift = 5f
 
