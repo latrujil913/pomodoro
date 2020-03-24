@@ -151,6 +151,7 @@ class StatsActivity : AppCompatActivity() {
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
     }
 
+    // dummy data
     private fun setupDummyLine(): ArrayList<Entry> {
         val yVals = ArrayList<Entry>()
         yVals.add(Entry(0f, MainActivity.finalList[0].dayHourList["hour0"]!!.toFloat(), "0"))
