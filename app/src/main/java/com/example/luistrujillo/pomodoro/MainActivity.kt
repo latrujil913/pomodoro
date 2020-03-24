@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -19,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
-//        val TAG = "Firebase transaction"
         // TODO: try mutable list
         lateinit var finalList : List<UserProfile>
     }
@@ -61,24 +61,18 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        if (newUser != null) {
-            newUser.projectList["Midterm"] = true
-        }
-
-//        println(newUser.projectList.keys.elementAt(0) + " SUPPPP")
         // Add as a new entry to the UserProfiles, using the name as the key
         if (newUser != null) {
+            newUser.projectList["Midterm"] = true
             userRef.child(newUser.name).setValue(newUser)
         }
-        else{
 
-        }
 
         // Set listener to be notified to any changes in UserProfiles
         userRef.addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(error: DatabaseError) {
-//                Log.w(SettingsActivity.TAG, "Failed to read value.", error.toException())
+//                Log.e(SettingsActivity.e, "Failed to read value.", error.toException())
             }
 
             /* This method is called once with the initial value and again
@@ -96,14 +90,6 @@ class MainActivity : AppCompatActivity() {
                     // Iterate through responses and convert to UserProfile
                     finalList = stands.map(UserProfileResponse::mapToStand)
 
-                    // remove the value of the given child from the userRef() folder
-//                    userRef.child("Fred").removeValue()
-
-//                    finalList[0].name = "TIMer"
-//                    println("*** This just in... data update!")
-//                    for (nextStand in finalList) {
-//                        println(nextStand)
-//                    }
                 }
             }
 
