@@ -1,10 +1,9 @@
 package com.example.luistrujillo.pomodoro
 
-import android.app.usage.UsageEvents
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -42,7 +41,7 @@ class AuthenticationActivity : AppCompatActivity() {
 //            Log.w(TAG, "Google sign in success!")
 //            val templst: MutableList<UsageEvents.Event?> = getDefaultSaved()
 
-            val fireUser = UserProfile(currentUser.displayName, currentUser.uid)
+            val fireUser = UserProfile(currentUser.displayName, currentUser.uid, 0f, 0f, hashMapOf(), hashMapOf(), hashMapOf())
 
             // Create a new user
             database.child("users").child(currentUser.uid).setValue(fireUser)
@@ -62,6 +61,6 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private fun signOut() {
         startActivity(SignInActivity.getLaunchIntent(this))
-        FirebaseAuth.getInstance().signOut();
+        FirebaseAuth.getInstance().signOut()
     }
 }

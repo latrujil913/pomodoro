@@ -2,6 +2,7 @@ package com.example.luistrujillo.pomodoro
 
 data class UserProfileResponse( // I just changed val to var
     val name : String = "",
+    val userId: String = "",
     val netPomodoroCount : Float = 0f,
     val netBreakCount : Float = 0f,
     val projectList: HashMap<String, Boolean> = hashMapOf(),
@@ -15,8 +16,8 @@ data class UserProfileResponse( // I just changed val to var
 //                                                        "16" to 0f, "17" to 0f, "18" to 0f, "19" to 0f, "20" to 0f,
 //                                                        "21" to 0f, "22" to 0f, "23" to 0f, "24" to 0f))
 
-//fun UserProfileResponse.mapToStand() =
-//    UserProfile(name, netPomodoroCount, netBreakCount, projectList, weekHourList, dayHourList)
+fun UserProfileResponse.mapToStand() =
+    UserProfile(name, userId, netPomodoroCount, netBreakCount, projectList, weekHourList, dayHourList)
 
 
 data class UserProfile(

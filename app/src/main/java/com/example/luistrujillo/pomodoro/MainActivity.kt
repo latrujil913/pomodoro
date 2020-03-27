@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         val newUser = user?.displayName?.let {
             UserProfile(
                 it,
+                "d",
                 0f,
                 0f,
                 hashMapOf("ProductivityTracker" to true),
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         // Add as a new entry to the UserProfiles, using the name as the key
         if (newUser != null) {
             newUser.projectList["Midterm"] = true
-            userRef.child(newUser.name).setValue(newUser)
+            newUser.name?.let { userRef.child(it).setValue(newUser) }
         }
 
 

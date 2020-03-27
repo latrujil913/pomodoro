@@ -6,6 +6,7 @@ package com.example.luistrujillo.pomodoro
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -15,21 +16,20 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_settings.*
 
 // TODO: associate this data to a user profile
 class SettingsActivity : AppCompatActivity() {
-    companion object {
-//        fun getLaunchIntent(from: Context) = Intent(from, SignInActivity::class.java).apply {
-//            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//        }
-    }
 
-    private val RC_SIGN_IN: Int = 1
+    private val RC_SIGN_IN: Int = 9001
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mGoogleSignInOptions: GoogleSignInOptions
 
-    private lateinit var firebaseAuth: FirebaseAuth
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,8 @@ class SettingsActivity : AppCompatActivity() {
 
         configureGoogleSignIn()
         setupUI()
-        firebaseAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -49,11 +50,23 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-//            Toast.makeText(this, "Hi, " + user.displayName + "!", Toast.LENGTH_LONG).show()
-//            val intent =  Intent(this, AuthenticationActivity::class.java)
-//            startActivity(intent)
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        database = FirebaseDatabase.getInstance().reference
+
+        if (currentUser != null) {
+            Log.i("auth", "Google sign in success! Settings Activity")
+
+            val fireUser = UserProfile(currentUser.displayName, currentUser.uid, 0f, 0f, hashMapOf(), hashMapOf(), hashMapOf())
+
+            // Create a new user
+            database.child("users").child(currentUser.uid).setValue(fireUser)
+
+            userNameTextView.text = "Hi, ${currentUser.displayName}!"
+        }
+        else {
+            Log.i("auth", "No user.")
         }
     }
 
@@ -102,7 +115,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
+        auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
 //                val intent =  Intent(this, AuthenticationActivity::class.java)
 //                startActivity(intent)
