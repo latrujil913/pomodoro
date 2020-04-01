@@ -105,7 +105,6 @@ class SettingsActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 if (account != null) {
                     firebaseAuthWithGoogle(account)
-                    emailTextView.text = account.email
                 }
             } catch (e: ApiException) {
                 Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG).show()

@@ -14,7 +14,7 @@
             app:msbp_maxValue="60"
             app:msbp_interval="1"
             app:msbp_measurementUnit="minutes"
-            app:msbp_dialogEnabled="false"/>
+            app:msbp_dialogEnabled="true"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
             android:key="com.luistrujillo.timer.timer_break_length"
@@ -25,6 +25,6 @@
             app:msbp_maxValue="60"
             app:msbp_interval="1"
             app:msbp_measurementUnit="minutes"
-            app:msbp_dialogEnabled="false"/>
+            app:msbp_dialogEnabled="true"/>
 
 </android.support.v7.preference.PreferenceScreen>
