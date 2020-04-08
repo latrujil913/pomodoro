@@ -25,7 +25,6 @@ class UserActivity : AppCompatActivity() {
 
 //        userNameTextView.text = MainActivity.finalList[0].name
 
-        // This will work TODO
         val calender = Calendar.getInstance()
         var cDay = calender.get(Calendar.DAY_OF_MONTH)
         var cMonth = calender.get(Calendar.MONTH) + 1
@@ -93,20 +92,6 @@ class UserActivity : AppCompatActivity() {
 
     @SuppressLint("ResourceType")
     private fun onCreateAddDialog() {
-        /*
-        val builder = AlertDialog.Builder(this)
-        val input = EditText(this)
-//        builder.setView(input)
-
-        builder.setView(layoutInflater.inflate(R.layout.dialog_add_project, null))
-            .setPositiveButton("Add") { dialog, id ->
-                val value = input.text
-                Toast.makeText(this, value , Toast.LENGTH_LONG).show()
-            }
-            .setNegativeButton("Cancel"
-            ) { _, _ -> }
-        builder.show()
-*/
         val database = FirebaseDatabase.getInstance();
         val ref = database.getReference();
         val alert = AlertDialog.Builder(this)

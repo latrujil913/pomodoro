@@ -11,13 +11,11 @@ import android.graphics.Typeface
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.widget.TextView
-//import androidx.annotation.RequiresApi
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
 
 class TimerActivity : AppCompatActivity() {
-    // This will work TODO
     val calander = Calendar.getInstance()
     var cDay = calander.get(Calendar.DAY_OF_MONTH)
     var cWeekDay = calander.get(Calendar.DAY_OF_WEEK)
@@ -33,7 +31,6 @@ class TimerActivity : AppCompatActivity() {
     var cHour = calander.get(Calendar.HOUR)
     var cMinute = calander.get(Calendar.MINUTE)
     var cSecond = calander.get(Calendar.SECOND)
-//    println("Month: $cDay")
 
     companion object {
         val currentSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000

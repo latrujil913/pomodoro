@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -20,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        // TODO: try mutable list
         lateinit var finalList : List<UserProfile>
     }
 
@@ -128,10 +126,7 @@ class MainActivity : AppCompatActivity() {
         val intent =  Intent(this, StatsActivity::class.java)
         startActivity(intent)
     }
-    private fun openAuthActivity(){
-        val intent =  Intent(this, AuthenticationActivity::class.java)
-        startActivity(intent)
-    }
+
 
     private fun setupBarChartData() {
         // create BarEntry for Bar Group
