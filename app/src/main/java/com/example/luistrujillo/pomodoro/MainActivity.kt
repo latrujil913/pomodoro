@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         lateinit var finalList : List<UserProfile>
     }
 
+    private lateinit var database : FirebaseDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,70 +32,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Pomodoro"
 
         setupBarChartData()
-        // write a message to the database
-        val database = FirebaseDatabase.getInstance()
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            userNameTextView.text = user.displayName
-        }
-
-        // Enable local persistence
-        database.setPersistenceEnabled(true)
-
-        // Get reference to the UserProfiles folder
-        val userRef = database.getReference("UserProfiles")
-
-        val defaultDummyDataDay = setupDataDay()
-        val defaultDummyDataWeek = setupDataWeek()
-
-        // Create a new instance to add
-        // Need to verify that this is the proper way to store user data before even thinking of publishing
-        // TODO: if user exists read from database
-        val newUser = user?.displayName?.let {
-            UserProfile(
-                it,
-                "d",
-                0f,
-                0f,
-                hashMapOf("ProductivityTracker" to true),
-                defaultDummyDataWeek,
-                defaultDummyDataDay
-            )
-        }
-
-        // Add as a new entry to the UserProfiles, using the name as the key
-        if (newUser != null) {
-            newUser.projectList["Midterm"] = true
-            newUser.name?.let { userRef.child(it).setValue(newUser) }
-        }
-
-
-        // Set listener to be notified to any changes in UserProfiles
-        userRef.addValueEventListener(object : ValueEventListener {
-
-            override fun onCancelled(error: DatabaseError) {
-//                Log.e(SettingsActivity.e, "Failed to read value.", error.toException())
-            }
-
-            /* This method is called once with the initial value and again
-             whenever data at this location is updated. */
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                // Break down dataSnapshot and convert to model objects
-                dataSnapshot.run {
-
-                    // Iterate through snapshot and build list of responses
-                    val stands = children.mapNotNull{
-                        it.getValue(UserProfileResponse::class.java)
-                    }
-
-                    // Iterate through responses and convert to UserProfile
-                    finalList = stands.map(UserProfileResponse::mapToStand)
-
-                }
-            }
-
-        })
+        setupFireBase()
 
         button_pomodoro.setOnClickListener{
             openTimerActivity()
@@ -125,6 +65,80 @@ class MainActivity : AppCompatActivity() {
     private fun openStatsActivity(){
         val intent =  Intent(this, StatsActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun setupFireBase() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val curUser : UserProfile?
+        val userRef = database.getReference("UserProfiles")
+        database = FirebaseDatabase.getInstance()
+        database.setPersistenceEnabled(true)  // Enable local persistence
+
+
+        if (user != null) {
+            userNameTextView.text = user.displayName
+
+            // TODO: define this user according to profile on firebase
+            curUser = user.displayName?.let {
+                UserProfile(
+                    it,
+                    "d",
+                    0f,
+                    0f,
+                    hashMapOf("ProductivityTracker" to true),
+                    setupDataWeek(),
+                    setupDataDay()
+                )
+            }
+        }
+        else {
+            curUser = user?.displayName?.let {
+                UserProfile(
+                    it,
+                    "d",
+                    0f,
+                    0f,
+                    hashMapOf("ProductivityTracker" to true),
+                    setupDataWeek(),
+                    setupDataDay()
+                )
+            }
+        }
+
+        // Add as a new entry to the UserProfiles, using the name as the key
+        if (curUser != null) {
+            curUser.projectList["Midterm"] = true
+            curUser.name?.let {
+                userRef.child(it).setValue(curUser)
+            }
+        }
+
+        // Set listener to be notified to any changes in UserProfiles
+        userRef.addValueEventListener(object : ValueEventListener {
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.i("main", "Failed to read from the database")
+            }
+
+            /* This method is called once with the initial value and again
+             whenever data at this location is updated. */
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                // Break down dataSnapshot and convert to model objects
+                dataSnapshot.run {
+
+                    // Iterate through snapshot and build list of responses
+                    val stands = children.mapNotNull{
+                        it.getValue(UserProfileResponse::class.java)
+                    }
+
+                    // Iterate through responses and convert to UserProfile
+                    finalList = stands.map(UserProfileResponse::mapToStand)
+
+                }
+            }
+
+        })
     }
 
 
