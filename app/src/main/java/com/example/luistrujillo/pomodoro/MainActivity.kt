@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         lateinit var finalList : List<UserProfile>
     }
 
-    private lateinit var database : FirebaseDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,9 +68,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupFireBase() {
         val user = FirebaseAuth.getInstance().currentUser
         val curUser : UserProfile?
-        val userRef = database.getReference("UserProfiles")
-        database = FirebaseDatabase.getInstance()
+        val database = FirebaseDatabase.getInstance()
         database.setPersistenceEnabled(true)  // Enable local persistence
+        val userRef = database.getReference("UserProfiles")
 
 
         if (user != null) {

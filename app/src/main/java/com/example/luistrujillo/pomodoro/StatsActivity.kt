@@ -14,9 +14,8 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity : AppCompatActivity() {
-
+    // Todo: set up average work time
     lateinit var pieChart: PieChart
-    var averageWorkTimeDay : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,20 +59,6 @@ class StatsActivity : AppCompatActivity() {
         dataSet.selectionShift = 5f
 
         val colors = java.util.ArrayList<Int>()
-
-        /*
-        for (c in ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c)
-
-        for (c in ColorTemplate.JOYFUL_COLORS)
-            colors.add(c)
-
-        for (c in ColorTemplate.COLORFUL_COLORS)
-            colors.add(c)
-
-        for (c in ColorTemplate.LIBERTY_COLORS)
-            colors.add(c)
-        */
 
         for (c in ColorTemplate.PASTEL_COLORS){
             colors.add(c)

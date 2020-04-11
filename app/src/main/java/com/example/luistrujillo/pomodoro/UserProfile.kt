@@ -1,5 +1,6 @@
 package com.example.luistrujillo.pomodoro
 
+
 data class UserProfileResponse( // I just changed val to var
     val name : String = "",
     val userId: String = "",

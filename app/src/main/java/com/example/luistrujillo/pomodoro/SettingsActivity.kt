@@ -58,11 +58,11 @@ class SettingsActivity : AppCompatActivity() {
         if (currentUser != null) {
             Log.i("auth", "Google sign in success! Settings Activity")
 
+            // TODO: populate a hashmap to see if goes of firebase
             val fireUser = UserProfile(currentUser.displayName, currentUser.uid, 0f, 0f, hashMapOf(), hashMapOf(), hashMapOf())
 
             // Create a new user
             database.child("users").child(currentUser.uid).setValue(fireUser)
-
             userNameTextView.text = "Hi, ${currentUser.displayName}!"
         }
         else {
@@ -93,7 +93,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
-//        startActivity(SignInActivity.getLaunchIntent(this))
         FirebaseAuth.getInstance().signOut()
     }
 
@@ -116,8 +115,6 @@ class SettingsActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-//                val intent =  Intent(this, AuthenticationActivity::class.java)
-//                startActivity(intent)
                 Toast.makeText(this,"Login success.", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG).show()
