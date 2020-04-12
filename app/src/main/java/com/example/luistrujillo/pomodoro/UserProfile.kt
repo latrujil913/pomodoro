@@ -1,7 +1,7 @@
 package com.example.luistrujillo.pomodoro
 
-
-data class UserProfileResponse( // I just changed val to var
+// TODO: https://firebase.google.com/docs/database/admin/save-data#section-push
+data class UserProfileResponse(
     val name : String = "",
     val userId: String = "",
     val netPomodoroCount : Float = 0f,
@@ -29,16 +29,3 @@ data class UserProfile(
     var projectList: HashMap<String,Boolean>,
     var weekHourList: HashMap<String, Float>,
     var dayHourList: HashMap<String, Float>)
-
-data class Project(
-    var name : String,
-    var active : Boolean)
-
-
-//{
-//
-//
-////    operator fun inc(): UserProfile {
-////        return UserProfile(name, netPomodoroCount++)
-////    }
-//}

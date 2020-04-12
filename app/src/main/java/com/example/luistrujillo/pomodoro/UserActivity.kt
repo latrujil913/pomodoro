@@ -10,7 +10,9 @@ import kotlinx.android.synthetic.main.activity_user.*
 import android.widget.EditText
 import com.example.luistrujillo.pomodoro.R.id.addButton
 import com.example.luistrujillo.pomodoro.R.id.removeButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
@@ -18,23 +20,39 @@ class UserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_user)
         supportActionBar?.title = "User"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-//        userNameTextView.text = MainActivity.finalList[0].name
+        setupFireBase()
 
+        addButton.setOnClickListener {
+            onCreateAddDialog()
+        }
+        removeButton.setOnClickListener {
+            onCreateRemoveDialog()
+        }
+    }
+
+    private fun setupFireBase() {
+        val user = FirebaseAuth.getInstance().currentUser
+
+        if (user != null) {
+            user_profile_name.text = user.displayName
+        }
+    }
+
+    private fun setupCalender() {
         val calender = Calendar.getInstance()
-        var cDay = calender.get(Calendar.DAY_OF_MONTH)
-        var cMonth = calender.get(Calendar.MONTH) + 1
-        var cYear = calender.get(Calendar.YEAR)
-        var selectedMonth = "" + cMonth
-        var selectedYear = "" + cYear
-        var cHour = calender.get(Calendar.HOUR)
-        var cMinute = calender.get(Calendar.MINUTE)
-        var cSecond = calender.get(Calendar.SECOND)
-        var cAmPm = calender.get(Calendar.AM_PM)
+        val cDay = calender.get(Calendar.DAY_OF_MONTH)
+        val cMonth = calender.get(Calendar.MONTH) + 1
+        val cYear = calender.get(Calendar.YEAR)
+        val selectedMonth = "" + cMonth
+        val selectedYear = "" + cYear
+        val cHour = calender.get(Calendar.HOUR)
+        val cMinute = calender.get(Calendar.MINUTE)
+        val cSecond = calender.get(Calendar.SECOND)
+        val cAmPm = calender.get(Calendar.AM_PM)
 
         println("Day of the month: $cDay")
         println("Month: $cMonth")
@@ -46,12 +64,6 @@ class UserActivity : AppCompatActivity() {
         println("Second: $cSecond")
         println("AM or PM: $cAmPm")
 
-        addButton.setOnClickListener {
-            onCreateAddDialog()
-        }
-        removeButton.setOnClickListener {
-            onCreateRemoveDialog()
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -87,16 +87,17 @@
             android:padding="20dp"
             android:scaleType="centerCrop"
             android:layout_alignParentTop="true"/>
+
     <TextView
-            android:id="@+id/user_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="150dp"
-            android:text="Luis Trujillo"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        android:id="@+id/user_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="My Profile"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
     <android.support.constraint.ConstraintLayout
